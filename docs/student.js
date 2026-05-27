@@ -111,6 +111,7 @@ async function issueBook() {
     document.getElementById("issueStudentId").value = "";
     document.getElementById("issueBookId").value    = "";
     loadBooks(); // Refresh to show updated quantity
+    loadIssuedBooks();
   } else {
     showMessage("issueMsg", data.error, true);
   }
