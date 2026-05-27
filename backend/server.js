@@ -92,9 +92,11 @@ app.get("/students/:id/books", (req, res) => {
   db.all(
 
     `
-    SELECT *
-    FROM books
-    WHERE issued_to = ?
+    SELECT books.*
+    FROM issued_books
+    JOIN books
+      ON issued_books.book_id = books.id
+    WHERE issued_books.student_id = ?
     `,
 
     [studentId],
