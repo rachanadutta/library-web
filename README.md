@@ -150,15 +150,3 @@ You **don't need a frontend server**. Just open the HTML files in your browser:
 5. Make sure `api.js` already points to your Render backend URL.
 
 ---
-
-## 📝 Notes for College Viva
-
-- **No login/JWT** — roles are selected on the home page, keeping code simple.
-- **SQLite** stores data in a single file `library.db` — no database server needed.
-- **REST API** uses standard HTTP verbs: GET, POST, DELETE.
-- **fetch()** in the frontend replaces older AJAX — modern and beginner-friendly.
-- Business rules from the original Java project are fully preserved:
-  - A student can issue max **3 books** at a time.
-  - A book cannot be deleted while it's currently issued.
-  - A student cannot be removed while they have issued books.
-  - A book cannot be issued if quantity is 0.
