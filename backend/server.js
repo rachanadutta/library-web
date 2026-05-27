@@ -85,6 +85,34 @@ app.delete("/books/:id", (req, res) => {
   res.json({ message: "Book deleted successfully" });
 });
 
+app.get("/students/:id/books", (req, res) => {
+
+  const studentId = req.params.id;
+
+  db.all(
+
+    `
+    SELECT *
+    FROM books
+    WHERE issued_to = ?
+    `,
+
+    [studentId],
+
+    (err, rows) => {
+
+      if(err) {
+
+        return res.status(500).json({
+          error: err.message
+        });
+      }
+
+      res.json(rows);
+    }
+  );
+});
+
 // ═══════════════════════════════════════════
 //  STUDENT ROUTES  (Librarian features)
 // ═══════════════════════════════════════════
