@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Login</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav class="navbar">
+  <span class="nav-logo">📚 Library System</span>
+
+  <div class="nav-links">
+    <a href="index.html">🏠 Home</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- LOGIN -->
+
+  <section class="card">
+    <h2>🎓 Student Login</h2>
+
+    <div class="form-row">
+      <input id="loginId" type="number" placeholder="Student ID"/>
+      <input id="loginPassword" type="password" placeholder="Password"/>
+      <button onclick="studentLogin()" class="btn btn-blue">
+        Login
+      </button>
+    </div>
+
+    <div id="loginMsg" class="message"></div>
+  </section>
+
+  <!-- REGISTER -->
+
+  <section class="card">
+    <h2>📝 New Student Registration</h2>
+
+    <div class="form-row">
+      <input id="studentName" type="text" placeholder="Your Name"/>
+      <input id="studentDept" type="text" placeholder="Department"/>
+
+      <button onclick="registerStudent()" class="btn btn-green">
+        Register
+      </button>
+    </div>
+
+    <div id="registerMsg" class="message"></div>
+  </section>
+
+</div>
+
+<script src="api.js"></script>
+
+<script>
+
+async function registerStudent() {
+
+  const name =
+    document.getElementById("studentName").value.trim();
+
+  const department =
+    document.getElementById("studentDept").value.trim();
+
+  if(!name || !department) {
+
+    document.getElementById("registerMsg").innerText =
+      "Please fill all fields";
+
+    return;
+  }
+
+  const res = await fetch(`${API}/students`, {
+
+    method: "POST",
+
+    headers: {
+      "Content-Type":"application/json"
+    },
+
+    body: JSON.stringify({
+      name,
+      department
+    })
+
+  });
+
+  const data = await res.json();
+
+  if(res.ok) {
+
+    localStorage.setItem(
+      `studentPassword_${data.id}`,
+      data.id
+    );
+
+    document.getElementById("registerMsg").innerHTML = `
+      Registration successful.<br><br>
+
+      Student ID: <b>${data.id}</b><br>
+      Password: <b>${data.id}</b><br><br>
+
+      Use these credentials to login.
+    `;
+
+  } else {
+
+    document.getElementById("registerMsg").innerText =
+      data.error;
+  }
+}
+
+function studentLogin() {
+
+  const id =
+    document.getElementById("loginId").value;
+
+  const password =
+    document.getElementById("loginPassword").value;
+
+  const savedPassword =
+    localStorage.getItem(`studentPassword_${id}`);
+
+  if(savedPassword &&
+     savedPassword === password) {
+
+    localStorage.setItem("studentLoggedIn", "true");
+
+    localStorage.setItem("studentId", id);
+
+    window.location.href = "student.html";
+
+  } else {
+
+    document.getElementById("loginMsg").innerText =
+      "Invalid student ID or password";
+  }
+}
+
+</script>
+
+</body>
+</html>

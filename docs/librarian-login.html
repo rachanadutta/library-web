@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Librarian Login</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div class="container">
+  <section class="card" style="max-width:500px;margin:80px auto;">
+    
+    <h1>🧑‍💼 Librarian Login</h1>
+
+    <div class="form-row" style="flex-direction:column;">
+      <input id="username" type="text" placeholder="Username"/>
+      <input id="password" type="password" placeholder="Password"/>
+      <button onclick="login()" class="btn btn-green">Login</button>
+    </div>
+
+    <div id="msg" class="message"></div>
+
+    <br>
+    <a href="index.html">⬅ Back</a>
+
+  </section>
+</div>
+
+<script>
+const LIBRARIAN_USERNAME = "admin";
+const LIBRARIAN_PASSWORD = "admin123";
+
+function login() {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+  if(username === LIBRARIAN_USERNAME &&
+     password === LIBRARIAN_PASSWORD) {
+
+    localStorage.setItem("librarianLoggedIn", "true");
+    window.location.href = "librarian.html";
+
+  } else {
+    document.getElementById("msg").innerText =
+      "Invalid username or password";
+  }
+}
+</script>
+
+</body>
+</html>

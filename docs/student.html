@@ -1,3 +1,20 @@
+<script>
+
+if(localStorage.getItem("studentLoggedIn") !== "true") {
+
+  window.location.href = "student-login.html";
+}
+
+function logout() {
+
+  localStorage.removeItem("studentLoggedIn");
+
+  localStorage.removeItem("studentId");
+
+  window.location.href = "student-login.html";
+}
+
+</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +31,9 @@
     <div class="nav-links">
       <a href="index.html">🏠 Home</a>
       <span class="nav-role student-badge">🎓 Student</span>
+      <button onclick="logout()" class="btn btn-red btn-sm">
+  Logout
+</button>
     </div>
   </nav>
 
