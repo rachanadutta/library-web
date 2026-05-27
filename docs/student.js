@@ -20,48 +20,7 @@ async function loadBooks() {
     ["Book ID", "Title", "Author", "Available Qty"]
   );
 }
-async function loadIssuedBooks() {
 
-  const studentId =
-    localStorage.getItem("studentId");
-
-  const res = await fetch(
-    `${API}/students/${studentId}/books`
-  );
-
-  const books = await res.json();
-
-  const container =
-    document.getElementById("issuedBooksList");
-
-  if(books.length === 0) {
-
-    container.innerHTML =
-      "<p>No books issued.</p>";
-
-    return;
-  }
-
-  container.innerHTML = books.map(book => `
-
-    <div class="book-card">
-
-      <h3>${book.title}</h3>
-
-      <p>
-        <strong>Author:</strong>
-        ${book.author}
-      </p>
-
-      <p>
-        <strong>Book ID:</strong>
-        ${book.id}
-      </p>
-
-    </div>
-
-  `).join("");
-}
 // ── Register (self-register as a student) ────────────────
 async function registerStudent() {
   const name       = document.getElementById("studentName").value.trim();
@@ -111,7 +70,7 @@ async function issueBook() {
     document.getElementById("issueStudentId").value = "";
     document.getElementById("issueBookId").value    = "";
     loadBooks(); // Refresh to show updated quantity
-    loadIssuedBooks();
+    
   } else {
     showMessage("issueMsg", data.error, true);
   }
@@ -143,4 +102,4 @@ async function returnBook() {
     showMessage("returnMsg", data.error, true);
   }
 }
-loadIssuedBooks();
+
