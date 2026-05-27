@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Librarian Panel – Library System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Top navigation bar -->
+  <nav class="navbar">
+    <span class="nav-logo">📚 Library System</span>
+    <div class="nav-links">
+      <a href="index.html">🏠 Home</a>
+      <span class="nav-role librarian-badge">🧑‍💼 Librarian</span>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="page-title">Librarian Panel</h1>
+
+    <!-- ── SECTION 1: Add Book ─────────────────── -->
+    <section class="card">
+      <h2>➕ Add Book</h2>
+      <div class="form-row">
+        <input id="bookTitle"    type="text"   placeholder="Book Title"  />
+        <input id="bookAuthor"   type="text"   placeholder="Author Name" />
+        <input id="bookQuantity" type="number" placeholder="Quantity" min="1" />
+        <button onclick="addBook()" class="btn btn-green">Add Book</button>
+      </div>
+      <div id="addBookMsg" class="message"></div>
+    </section>
+
+    <!-- ── SECTION 2: All Books ───────────────── -->
+    <section class="card">
+      <h2>📖 All Books</h2>
+      <button onclick="loadBooks()" class="btn btn-blue">Refresh</button>
+      <div id="booksTable" class="table-wrapper"></div>
+    </section>
+
+    <!-- ── SECTION 3: Register Student ───────── -->
+    <section class="card">
+      <h2>🎓 Register Student</h2>
+      <div class="form-row">
+        <input id="studentName"  type="text" placeholder="Student Name"   />
+        <input id="studentDept"  type="text" placeholder="Department"     />
+        <button onclick="addStudent()" class="btn btn-green">Register</button>
+      </div>
+      <div id="addStudentMsg" class="message"></div>
+    </section>
+
+    <!-- ── SECTION 4: All Students ───────────── -->
+    <section class="card">
+      <h2>👥 All Students</h2>
+      <button onclick="loadStudents()" class="btn btn-blue">Refresh</button>
+      <div id="studentsTable" class="table-wrapper"></div>
+    </section>
+
+    <!-- ── SECTION 5: Issue Book ─────────────── -->
+    <section class="card">
+      <h2>📤 Issue Book</h2>
+      <div class="form-row">
+        <input id="issueStudentId" type="number" placeholder="Student ID" />
+        <input id="issueBookId"    type="number" placeholder="Book ID"    />
+        <button onclick="issueBook()" class="btn btn-orange">Issue Book</button>
+      </div>
+      <div id="issueMsg" class="message"></div>
+    </section>
+
+    <!-- ── SECTION 6: Return Book ────────────── -->
+    <section class="card">
+      <h2>📥 Return Book</h2>
+      <div class="form-row">
+        <input id="returnStudentId" type="number" placeholder="Student ID" />
+        <input id="returnBookId"    type="number" placeholder="Book ID"    />
+        <button onclick="returnBook()" class="btn btn-purple">Return Book</button>
+      </div>
+      <div id="returnMsg" class="message"></div>
+    </section>
+
+    <!-- ── SECTION 7: Issued Books Log ───────── -->
+    <section class="card">
+      <h2>📋 Currently Issued Books</h2>
+      <button onclick="loadIssued()" class="btn btn-blue">Refresh</button>
+      <div id="issuedTable" class="table-wrapper"></div>
+    </section>
+
+  </div><!-- /container -->
+
+  <script src="api.js"></script>
+  <script src="librarian.js"></script>
+  <script>
+    // Auto-load all data when page opens
+    loadBooks();
+    loadStudents();
+    loadIssued();
+  </script>
+</body>
+</html>

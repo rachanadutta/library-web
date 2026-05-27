@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Portal – Library System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Top navigation bar -->
+  <nav class="navbar">
+    <span class="nav-logo">📚 Library System</span>
+    <div class="nav-links">
+      <a href="index.html">🏠 Home</a>
+      <span class="nav-role student-badge">🎓 Student</span>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="page-title">Student Portal</h1>
+
+    <!-- ── SECTION 1: Register ───────────────── -->
+    <section class="card">
+      <h2>📝 Register as Student</h2>
+      <p class="hint">New student? Register yourself here first to get a Student ID.</p>
+      <div class="form-row">
+        <input id="studentName" type="text" placeholder="Your Name"   />
+        <input id="studentDept" type="text" placeholder="Department"  />
+        <button onclick="registerStudent()" class="btn btn-green">Register</button>
+      </div>
+      <div id="registerMsg" class="message"></div>
+    </section>
+
+    <!-- ── SECTION 2: View Books ─────────────── -->
+    <section class="card">
+      <h2>📖 Available Books</h2>
+      <button onclick="loadBooks()" class="btn btn-blue">Refresh</button>
+      <div id="booksTable" class="table-wrapper"></div>
+    </section>
+
+    <!-- ── SECTION 3: Issue Book ─────────────── -->
+    <section class="card">
+      <h2>📤 Issue a Book</h2>
+      <p class="hint">You can issue up to 3 books at a time.</p>
+      <div class="form-row">
+        <input id="issueStudentId" type="number" placeholder="Your Student ID" />
+        <input id="issueBookId"    type="number" placeholder="Book ID"         />
+        <button onclick="issueBook()" class="btn btn-orange">Issue Book</button>
+      </div>
+      <div id="issueMsg" class="message"></div>
+    </section>
+
+    <!-- ── SECTION 4: Return Book ────────────── -->
+    <section class="card">
+      <h2>📥 Return a Book</h2>
+      <div class="form-row">
+        <input id="returnStudentId" type="number" placeholder="Your Student ID" />
+        <input id="returnBookId"    type="number" placeholder="Book ID"         />
+        <button onclick="returnBook()" class="btn btn-purple">Return Book</button>
+      </div>
+      <div id="returnMsg" class="message"></div>
+    </section>
+
+  </div><!-- /container -->
+
+  <script src="api.js"></script>
+  <script src="student.js"></script>
+  <script>
+    // Load books automatically when the page opens
+    loadBooks();
+  </script>
+</body>
+</html>
